@@ -1,4 +1,4 @@
-from calculation_handler import set_board, set_rule, apply_rule, evolve, plot_evolution
+from calculation_handler import set_board, set_rule, evolve, plot_evolution
 import numpy as np
 import argparse
 
