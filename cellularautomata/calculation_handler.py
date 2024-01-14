@@ -14,9 +14,7 @@ def set_rule(rule_num: int) -> list:
     """Set board with 8 bits based on rule number."""
 
     binary_representation = format(rule_num, "08b")
-    result = [int(bit) for bit in binary_representation]
-    result.reverse()
-    return result
+    return [int(bit) for bit in reversed(binary_representation)]
 
 
 def apply_rule(
@@ -31,17 +29,17 @@ def apply_rule(
 def evolve(rule_board: list, initial_state: np.ndarray, steps: int) -> list:
     """Evolve board 'steps' times."""
 
-    left_corner = 1
-    right_corner = len(initial_state) - 1
+    left_corner, right_corner = 1, len(initial_state) - 1
     state = initial_state.copy()
     history = [state.copy()]
+
     for _ in range(steps):
         new_state = np.zeros_like(state)
         for i in range(left_corner, right_corner):
             new_state[i] = apply_rule(rule_board, state[i - 1], state[i], state[i + 1])
         new_state[0] = apply_rule(rule_board, state[-1], state[0], state[1])
         new_state[-1] = apply_rule(rule_board, state[-2], state[-1], state[0])
-        state = new_state.copy()
+        state[:] = new_state
         history.append(state.copy())
     return history
 
