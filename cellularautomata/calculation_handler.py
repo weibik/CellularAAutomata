@@ -29,6 +29,8 @@ def evolve(rule_board, initial_state, steps: int):
         new_state = np.zeros_like(state)
         for i in range(left_corner, right_corner):
             new_state[i] = apply_rule(rule_board, state[i - 1], state[i], state[i + 1])
+        new_state[0] = apply_rule(rule_board, state[-1], state[0], state[1])
+        new_state[-1] = apply_rule(rule_board, state[-2], state[-1], state[0])
         state = new_state.copy()
         history.append(state.copy())
     return history
@@ -36,8 +38,9 @@ def evolve(rule_board, initial_state, steps: int):
 
 def plot_evolution(history, size, steps):
     plt.figure(figsize=(size // 10, steps // 10))
-    plt.imshow(np.array(history), cmap="binary", interpolation="nearest")
+    plt.imshow(np.array(history), cmap="binary", interpolation="none", aspect="auto")
     plt.xlabel("Time Step")
     plt.ylabel("Cell")
-    plt.title("Rule 30 Cellular Automaton Evolution")
+    plt.title("Cellular Automaton Evolution")
+    plt.get_current_fig_manager().window.state('zoomed')
     plt.show()
