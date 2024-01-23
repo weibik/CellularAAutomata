@@ -16,7 +16,7 @@ Visualization: Visualize the evolution of the automaton through a plotted image,
 
 ## Usage
 1. Clone the repository to your local machine
-```git clone https://github.com/your-username/cellular-automaton-simulator.git```
+```git clone https://github.com/weibik/cellular-automaton-simulator.git```
 
 2. Install poetry
 ```Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -```
